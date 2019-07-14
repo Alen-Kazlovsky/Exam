@@ -13,7 +13,7 @@ public class FiguresFxApp extends Application {
     }
 
     public void start(Stage window) throws Exception {
-        window.setTitle("Экзамеционный проект");
+        window.setTitle("Экзаменационный проект");
         Parent root = FXMLLoader.load(getClass().getResource("/views/MainScreenView.fxml"));
         window.setScene(new Scene(root, 1024, 600));
         window.setResizable(false);

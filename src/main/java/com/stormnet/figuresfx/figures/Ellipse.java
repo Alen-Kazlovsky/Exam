@@ -19,8 +19,8 @@ public class Ellipse extends Figure {
         this(cx, cy, lineWidth, color);
         this.width = width < 10 ? 10 : width;
         this.height = height < 10 ? 10 : height;
-        this.radius1 = radius1 < 10 ? 10 : radius1;
-        this.radius2 = radius2 < 10 ? 10 : radius2;
+        this.radius1 = radius1 < 15 ? 15 : radius1;
+        this.radius2 = radius2 < 15 ? 15 : radius2;
     }
 
     public double getWidth() {
@@ -90,6 +90,6 @@ public class Ellipse extends Figure {
     public void draw(GraphicsContext gc) {
         gc.setLineWidth(lineWidth);
         gc.setStroke(color);
-        gc.strokeOval(cx, cy, radius1, height);
+        gc.strokeOval(cx-width, cy-height, radius1, radius2);
     }
 }

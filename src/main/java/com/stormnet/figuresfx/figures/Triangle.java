@@ -56,15 +56,9 @@ public class Triangle extends Figure {
         gc.setStroke(color);
         gc.strokePolygon(
 
-                new double[]{
-                        cx,
-                        cx + base / 2,
-                        cx - base / 2},
+                new double[]{cx, cx + base / 2, cx - base / 2},
 
-                new double[]{
-                        cy - base / 2,
-                        cy + base / 2,
-                        cy + base / 2},
+                new double[]{cy - base / 2, cy + base / 2, cy + base / 2},
                 3);
 
     }

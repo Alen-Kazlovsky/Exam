@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import org.apache.log4j.Logger;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,7 +15,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+
 public class MainScreenViewController implements Initializable {
+    final static Logger logger = Logger.getLogger(MainScreenViewController.class);
     List<Figure> figures = new ArrayList<>();
     private Random random;
 
@@ -28,12 +31,10 @@ public class MainScreenViewController implements Initializable {
     }
 
     @FXML
-    private void onMouseClicked(MouseEvent mouseEvent) {
+    private void onMouseClicked(MouseEvent mouseEvent) throws Exception {
         addFigure(createFigure(mouseEvent.getX(), mouseEvent.getY()));
         repaint();
     }
-
-
 
     private void repaint() {
 
@@ -42,25 +43,26 @@ public class MainScreenViewController implements Initializable {
         drawer.draw(canvas.getGraphicsContext2D());
     }
 
+    private Figure createFigure(double x, double y) throws Exception {
+        Figure figure=null;
 
-    private Figure createFigure(double x, double y) {
-        Figure figure = null;
-        //Тип фигуры
-        switch (random.nextInt(4)) {
+        switch (random.nextInt(5)) {
             case Figure.FIGURE_TYPE_CIRCLE:
-                figure = new Circle(x, y, random.nextInt(4), Color.GREEN, random.nextInt(50));
+                figure = new Circle(x, y, random.nextInt(9), Color.BROWN, random.nextInt(50));
                 break;
             case Figure.FIGURE_TYPE_RECTANGLE:
-                figure = new Rectangle(x, y, random.nextInt(4), Color.RED, random.nextInt(100), random.nextInt(100));
+                figure = new Rectangle(x, y, random.nextInt(7), Color.BLACK, random.nextInt(100), random.nextInt(100));
                 break;
             case Figure.FIGURE_TYPE_TRIANGLE:
                 figure = new Triangle(x, y, random.nextInt(4), Color.BLUE, random.nextInt(100));
                 break;
             case Figure.FIGURE_TYPE_ELLIPSE:
-                figure = new Ellipse(x, y, random.nextInt(8), Color.LIGHTPINK, random.nextInt(100), random.nextInt(100));
+                figure = new Ellipse(x, y, random.nextInt(5), Color.LIGHTPINK, random.nextInt(100), random.nextInt(100));
                 break;
             default:
-                System.out.println("Unknown figure type");
+                logger.error(new FigureExcaption("Незвестный тип фигуры"));
+               // throw new FigureExcaption("Незвестный тип фигуры");
+
         }
         return figure;
     }
